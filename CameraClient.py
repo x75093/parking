@@ -20,6 +20,14 @@ class CameraClient(object):
         cap.release()                                                           
         return self.__get_image_data(Image.fromarray(image))
 
+
+    def get_filename(self):
+        return self.location_id + str(datetime.strftime( datetime.now() , '%Y-%m-%d %H:%M:%S' )) + ".jpg"
+
+    def upload_image(self, img_data, img_filename):
+        self.s3["client"].Bucket(self.s3["bucket"]).put_object(Key = img_filename, Body = img_data)
+        time.sleep(self.__get_sleep_time())
+
     def write_to_db(self, img_filename):                                        
         self.tables["Spots"].update_item(                                       
             Key={'location_id': self.location_id },                             
