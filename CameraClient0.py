@@ -29,7 +29,7 @@ class CameraClient(object):
         time.sleep(self.__get_sleep_time())
 
     def write_to_db(self, img_filename):                                        
-        self.tables["Spots"].update_item(                                       
+        self.tables["Harvard_Allston"].update_item(                                       
             Key={'location_id': self.location_id },                             
             UpdateExpression="set image_name = :i, updated=:u, dtg=:d, ip_address= :ip",
             ExpressionAttributeValues={                                         
