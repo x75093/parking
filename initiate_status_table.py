@@ -4,7 +4,7 @@ import sys
 from decimal import Decimal
 from datetime import datetime 
 
-status_table_name = "Spots2"
+status_table_name = "Harvard_Allston"
 this_node = "Harvard_Allston_01"
 image_name = "test.jpg"
 updated = False
