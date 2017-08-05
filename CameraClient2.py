@@ -51,7 +51,7 @@ class CameraClient(object):
         os.remove(tmp_filename)                                                 
         return img_binary_data                                                  
                                                                                 
-LOCATION_ID = "Harvard_Allston_01"                                                         
+LOCATION_ID = "Harvard_Allston_01c"                                                         
 client = CameraClient(LOCATION_ID)                                              
 img_data = client.snap_photo()                                                  
 img_filename = client.get_filename()                                            
