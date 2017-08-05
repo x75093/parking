@@ -5,7 +5,6 @@ import os
 import subprocess                                                               
 from PIL import Image                                                           
 from datetime import datetime 
-#test
                                                                                 
 class CameraClient(object):                                                     
                                                                                 
