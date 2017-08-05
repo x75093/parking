@@ -10,9 +10,9 @@ class CameraClient(object):
                                                                                 
     def __init__(self, location_id):                                            
         self.location_id = location_id                                          
-        self.s3 = {"client": boto3.resource('s3'), "bucket": "parking-spots" }  
+        self.s3 = {"client": boto3.resource('s3'), "bucket": "parking-spots2" }  
         self.dynamodb_client = boto3.resource('dynamodb')                       
-        self.tables = { "Spots": self.dynamodb_client.Table("Spots") }          
+        self.tables = { "Spots2": self.dynamodb_client.Table("Spots2") }          
                                                                                 
     def snap_photo(self):                                                       
         cap = cv2.VideoCapture(2)                                               
@@ -31,20 +31,19 @@ class CameraClient(object):
     def write_to_db(self, img_filename):                                        
         self.tables["Spots"].update_item(                                       
             Key={'location_id': self.location_id },                             
-            UpdateExpression="set image_name = :i, updated=:u, dtg=:d, ip_address= :ip, username = :un",
+            UpdateExpression="set image_name = :i, updated=:u, dtg=:d, ip_address= :ip,
             ExpressionAttributeValues={                                         
                 ':i': img_filename,                                             
                 ':u': True,                                                     
-                ':d': "T",#subprocess.Popen("date", stdout=subprocess.PIPE, shel
-                ':ip': "T",#subprocess.Popen("ifconfig | sed -En 's/127.0.0.1//;
-                ':un': "T",#subprocess.Popen("whoami", stdout=subprocess.PIPE, s
+                ':d': False,
+                ':ip': subprocess.Popen("ip route get 1 | awk '{print $NF;exit}'", stdout=subprocess.PIPE, shell=True).communicate()[0],
             },                                                                  
             ReturnValues="UPDATED_NEW"                                          
         )
 
     ### Private Methods                                                         
     def __get_sleep_time(self):                                                 
-        return self.tables["Spots"].get_item(Key={'location_id': self.location_id})["Item"]["sleep"]
+        return self.tables["Spots2"].get_item(Key={'location_id': self.location_id})["Item"]["sleep"]
                                                                                 
     def __get_image_data(self, img, tmp_filename = "tmp.jpg"):                  
         img.save(tmp_filename)                                                  
@@ -52,7 +51,7 @@ class CameraClient(object):
         os.remove(tmp_filename)                                                 
         return img_binary_data                                                  
                                                                                 
-LOCATION_ID = "wilby_1"                                                         
+LOCATION_ID = "Harvard_Allston_01"                                                         
 client = CameraClient(LOCATION_ID)                                              
 img_data = client.snap_photo()                                                  
 img_filename = client.get_filename()                                            
