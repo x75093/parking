@@ -31,7 +31,7 @@ class CameraClient(object):
     def write_to_db(self, img_filename):                                        
         self.tables["Spots"].update_item(                                       
             Key={'location_id': self.location_id },                             
-            UpdateExpression="set image_name = :i, updated=:u, dtg=:d, ip_address= :ip,
+            UpdateExpression="set image_name = :i, updated=:u, dtg=:d, ip_address= :ip",
             ExpressionAttributeValues={                                         
                 ':i': img_filename,                                             
                 ':u': True,                                                     
