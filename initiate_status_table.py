@@ -5,7 +5,7 @@ from decimal import Decimal
 from datetime import datetime 
 
 status_table_name = "Harvard_Allston"
-this_node = "Harvard_Allston_01"
+this_node = "Harvard_Allston_01a"
 image_name = "test.jpg"
 updated = False
 ip_address = "test"
