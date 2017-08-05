@@ -12,7 +12,7 @@ class CameraClient(object):
         self.location_id = location_id                                          
         self.s3 = {"client": boto3.resource('s3'), "bucket": "parking-spots2" }  
         self.dynamodb_client = boto3.resource('dynamodb')                       
-        self.tables = { "Spots2": self.dynamodb_client.Table("Spots2") }          
+        self.tables = { "Harvard_Allston": self.dynamodb_client.Table("Harvard_Allston") }          
                                                                                 
     def snap_photo(self):                                                       
         cap = cv2.VideoCapture(0)                                               
@@ -43,7 +43,7 @@ class CameraClient(object):
 
     ### Private Methods                                                         
     def __get_sleep_time(self):                                                 
-        return self.tables["Spots2"].get_item(Key={'location_id': self.location_id})["Item"]["sleep"]
+        return self.tables["Harvard_Allston"].get_item(Key={'location_id': self.location_id})["Item"]["sleep"]
                                                                                 
     def __get_image_data(self, img, tmp_filename = "tmp.jpg"):                  
         img.save(tmp_filename)                                                  
