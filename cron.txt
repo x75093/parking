@@ -1,0 +1,4 @@
+*/5 * * * * /usr/bin/python /home/pi/Desktop/workbench/parking/CameraClient0.py
+*/5 * * * * /usr/bin/python /home/pi/Desktop/workbench/parking/CameraClient1.py
+*/5 * * * * /usr/bin/python /home/pi/Desktop/workbench/parking/CameraClient2.py
+*/1 * * * * cd /home/pi/Desktop/workbench/parking && git pull -q origin master
