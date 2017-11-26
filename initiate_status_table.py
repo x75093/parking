@@ -4,8 +4,6 @@ import sys
 from decimal import Decimal
 from datetime import datetime
 
-#test
-
 status_table_name = "Harvard_Allston"
 this_node = "Harvard_Allston_01a"
 image_name = "test.jpg"
